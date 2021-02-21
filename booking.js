@@ -1,6 +1,7 @@
 
         const token = localStorage.getItem("token");
-            
+       
+        // localStorage.setItem("Authorization","")
         const headers ={
                'pragma': token
         }
@@ -19,29 +20,38 @@
                 headers: headers
             })
             .then(response=>{
-                createNotification(response,workingPlace);         
+                successNotification(response,workingPlace);         
             })
             .catch(err=>{
-                console.log(err)
+                console.log(err.response.data)
+                bookingErrorNotification(err);
             })
 
             document.getElementById("capacityDiv").style.display="block";     
         }
 
 
-        const createNotification = (response,workingPlace)=>{
-
-             if(response.data.trigger){
-                    const successMessage =
-                    `<h3 id="confirmation">Booking Confirmation</h3>
-                    <p id="successMessage">
-                    We booked successfully a place in ${workingPlace} 
-                    on ${response.data.bookingDate} for you.</p>`;     
-                        
-                    showNotification(successMessage); 
+        const bookingErrorNotification = (error)=>{
+            const errMessage = error.response.data;
+            
+        
+            if(errMessage.message){
+                
+                if(errMessage.message.charAt(0)==='!'){
+                    alert("User name not found in the system");
+                }else{
+                    alert("Invalid booking date");
+                }
             }else{
-                const personList =response.data.bookedPersonsList;
-                const roomList = [...response.data.roomList];                   
+               errorNotification(errMessage);               
+            }
+                             
+        }
+
+        const errorNotification = (errorMessage)=>{
+                  console.log(errorMessage)
+                const personList =errorMessage.bookedPersonsList;
+                const roomList = [...errorMessage.roomList];                   
                 const roomNames = roomList.map(room=> room.roomName);        
                 let roomSuggestedMessage ="";
 
@@ -59,9 +69,19 @@
 
                 }
                     
-                showNotification(roomSuggestedMessage);
+                showNotification(roomSuggestedMessage);               
+        }
 
-                }
+        const successNotification = (response,workingPlace)=>{
+         
+                    const successMessage =
+                    `<h3 id="confirmation">Booking Confirmation</h3>
+                    <p id="successMessage">
+                    We booked successfully a place in ${workingPlace} 
+                    on ${response.data.bookingDate} for you.</p>`;     
+                        
+                    showNotification(successMessage); 
+            
         }
 
  

@@ -11,15 +11,17 @@
             .then(response=>{
                  capacityNotification(response,givenDate);
             })
-            .catch(err=>console.log(err))
+            .catch(err=>alert("Invalid given date"))
         }
 
         const capacityNotification = (response,givenDate)=> {
 
             const message = `<p id="capacityMessage">The capacity of free working places on ${givenDate} is ${response.data}%</p>`;
-            document.getElementById("capacityNotification").style.display="block";
+            const capacityDiv = document.getElementById("capacityNotification");
+            capacityDiv.style.display = "block"
+            capacityDiv.innerHTML = ""
+
             const capacityPercentage =  document.createElement('div');
-            
             capacityPercentage.className = "notified";
             capacityPercentage.innerHTML = message;
             document.getElementById("capacityNotification").appendChild(capacityPercentage);

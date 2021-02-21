@@ -1,35 +1,5 @@
        
-       
-    //    $(document).ready(function (){
-            
-    //         document.getElementById("accountDiv").style.display ="block";
-    //         document.getElementById("loginDiv").style.display="none";
-    //         document.getElementById("bookingDiv").style.display="none";
-    //         document.getElementById("capacityDiv").style.display="none";
-    //         document.getElementById("logoutLi").style.display="none";
-
-
-    //       axios.interceptors.response.use(function (config){
-    //           console.log('response received');
-    //           console.log(config);
-    //           if(config.headers.pragma){
-    //               localStorage.setItem("token",config.headers.pragma);
-    //           }
-              
-    //           return config;
-
-    //       })
-
-    //       axios.interceptors.request.use(function (config){
-    //         console.log('request received');
-    //         console.log(config);
-    //         config.headers["Pragma"]=localStorage.getItem("token");
-                
-    //         return config;
-
-    //     })
-    //     })
-
+    
 
        const signUpConfirmation = ()=> {
       
@@ -42,42 +12,47 @@
                password:inpPassword
            })
            .then(res=>{
-               signUp();            
+               showLogIn();            
            })
            .catch(err=>
            {
-               showErrorNotification(err);
+               signUpErrorNotification(err);
            })
             
        }
        
-       const showErrorNotification = (error)=>{
+       const signUpErrorNotification = (error)=>{
           
           const errResponse = error.response.data.message;
           const firstChar = errResponse.charAt(0);
 
+          
           switch(firstChar){
-              case '-': alert("User  name already exist \nTry another name")
+              case '-': alert("User  name already exist \nTry another name");
+                        break;
               case '~': alert("User name should be at least 3 characters");
+                        break;
               case '>': alert("Password should be 6 characters and contains with any symbol");
+                        break;
+              default: alert("username and password can not be empty");
+                       
           }
      
        }
 
 
-       const signUp = ()=> {
+       const showSignUp = ()=> {
            
-               document.getElementById("accountDiv").style.display="none";
-               document.getElementById("loginDiv").style.display="block";
+            document.getElementById("accountDiv").style.display="block";
+            document.getElementById("loginDiv").style.display="none";
        }
 
-       const doLogIn = ()=> {
-        document.getElementById("accountDiv").style.display="none";
-        document.getElementById("loginDiv").style.display="block";
+       const showLogIn = ()=> {
+            document.getElementById("accountDiv").style.display="none";
+            document.getElementById("loginDiv").style.display="block";
        }
 
        const logInConfirmation = ()=> {
-       
        
             const loginAPI= `http://localhost:8080/login`;
             const inpUsername = document.getElementById("logIn-username").value;
@@ -88,19 +63,27 @@
                 password:inpPassword
             })
             .then(res=>{
+                console.log(res);
                 localStorage.setItem("token",res.headers.pragma);
-                console.log(res.headers)
+               
                 document.getElementById("loginDiv").style.display="none";
-            document.getElementById("bookingDiv").style.display="block";
-            document.getElementById("logoutLi").style.display="block";
-            document.getElementById("capacityDiv").style.display="block";
+                document.getElementById("bookingDiv").style.display="block";
+                document.getElementById("logoutLi").style.display="block";
+                document.getElementById("capacityDiv").style.display="block";
             })
-            .catch(err=>console.log(err))
+            .catch(err=>{
+                loginErrorHandler(err);
+            })
 
             
         }  
 
-        function logout(){
+
+        loginErrorHandler = (err)=>{
+            alert("Username/password not valid")
+        }
+
+        const  logout= ()=>{
                  
             const logoutAPI= `http://localhost:8080/logout`;
                    
