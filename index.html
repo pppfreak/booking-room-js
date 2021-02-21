@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,7 +13,7 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css" />
-  <!-- <script src="/createAccount.js" async></script> -->
+  
 
 </head>
 
@@ -26,59 +26,74 @@
         <li class="nav-item">
           <a href="/" class="nav-link">Home</a>
         </li>
-        <li class="nav-item">
+        <li  onclick="logIn()" class="nav-item">
           <a id="accountLink" href="/" class="nav-link">Create Account</a>
         </li>
-        <li class="nav-item">
+
+        <li id="booking" onclick="makeBooking()" class="nav-item">
           <a href="" class="nav-link">Booking</a>
         </li>
+
         <li class="nav-item">
           <a href="" class="nav-link">Log in</a>
         </li>
       </ul>
     </nav>
   </div>
- 
+
   <div class="container">
-    <div class="row">
-      <div class="column">
+    <div >
+      <div >
         <h1>Create Account</h1>
       </div>
     </div>
-    <div class="row">
+    <div id="accDiv"class="row">
       <div class="column">
 
-        <form >
-          <fieldset>
+        <form id="myForm">
+          <!-- <fieldset> -->
             <label for="userName">Username</label>
             <input name="userName" type="text" placeholder="Username" id="userName" />
- 
-            <!-- <label for="ageRangeField">Age Range</label>
-                <select name="age" id="ageRangeField">
-                  <option value="0-13">0-13</option>
-                  <option value="14-17">14-17</option>
-                  <option value="18-23">18-23</option>
-                  <option value="24+">24+</option>
-                </select>  -->
 
-            <label for="password">Password</label> 
+            <label for="password">Password</label>
             <input name="password" type="text" placeholder="Password" id="password" />
-              
-              <!-- <div class="float-right">
-                  <input name="sendToSelf" value="1"type="checkbox"id="confirmField"  />
-                  <label class="label-inline" for="confirmField" >Send a copy to yourself</label>
-                </div> -->
-            
-            <button id="inp-login" class="button-primary" type="submit">Log in</button>
-          </fieldset>
+
+
+            <input id="inp-login" class="button-primary" type="submit" />
+          <!-- </fieldset> -->
         </form>
-        
+
       </div>
     </div>
-  </div> 
 
+  </div>
 
+  <div id="divBooking"class="row">
+    <div class="column">
+
+      <form id="bookingForm">
+        <fieldset>
+
+          <label for="ageRangeField">Age Range</label>
+          <select name="age" id="ageRangeField">
+            <option value="0-13">0-13</option>
+            <option value="14-17">14-17</option>
+            <option value="18-23">18-23</option>
+            <option value="24+">24+</option>
+          </select>
+
+          <div class="float-right">
+            <input name="sendToSelf" value="1" type="checkbox" id="confirmField" />
+            <label class="label-inline" for="confirmField">Send a copy to yourself</label>
+          </div>
+
+          <input id="inp-login" class="button-primary" type="submit" />
+        </fieldset>
+      </form>
+
+    </div>
+  </div>
 
 </body>
-
-</html>
+<script src="/createAccount.js" ></script>
+</html> -->
